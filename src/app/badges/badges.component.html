@@ -1,0 +1,47 @@
+<p>Badges by {{ nimi }} works!</p>
+
+<div class="form-wrapper">
+  <h3>Add a New Badge</h3>
+  <form (ngSubmit)="addBadge()">
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="newBadge.name" name="name" placeholder="Enter badge name" required />
+    </div>
+    <div class="form-field">
+      <label for="color">Color</label>
+      <select id="color" [(ngModel)]="newBadge.color" name="color" required>
+        <option *ngFor="let color of availableColors" [value]="color">{{ color }}</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="icon">Icon</label>
+      <select id="icon" [(ngModel)]="newBadge.icon" name="icon" required>
+        <option *ngFor="let icon of availableIcons" [value]="icon">{{ icon }}</option>
+      </select>
+    </div>
+    
+    <div *ngIf="newBadge.name || newBadge.color || newBadge.icon" class="badge-preview">
+      <h4>Preview:</h4>
+      <div class="badge" [ngClass]="newBadge.color">
+        <div class="circle">
+          <span class="material-symbols-outlined">{{ newBadge.icon }}</span>
+        </div>
+        <div class="ribbon">{{ newBadge.name }}</div>
+      </div>
+    </div>
+
+    <button type="submit" class="add-badge-btn">Add Badge</button>
+  </form>
+</div>
+
+<div class="main-wrapper">
+  <div *ngFor="let badge of badges" 
+       class="badge" 
+       [ngClass]="badge.isGray ? 'gray' : badge.color" 
+       (click)="toggleGray(badge)">
+    <div class="circle">
+      <span class="material-symbols-outlined">{{ badge.icon }}</span>
+    </div>
+    <div class="ribbon">{{ badge.name }}</div>
+  </div>
+</div>
