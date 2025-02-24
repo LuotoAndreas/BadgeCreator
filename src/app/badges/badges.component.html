@@ -1,5 +1,19 @@
 <p>Badges by {{ nimi }} works!</p>
 
+
+<div class="audio-player">
+  <audio #backgroundMusic src="../assets/music/flooptydoop.mp3" controls></audio>
+  <div class="audio-controls">
+    <button class="audio-btn" (click)="playAudio()">Play</button>
+    <button class="audio-btn" (click)="pauseAudio()">Pause</button>
+    <button class="audio-btn" (click)="stopAudio()">Stop</button>
+    <button class="audio-btn" (click)="muteAudio()">Mute/Unmute</button>
+  </div>
+</div>
+
+
+
+
 <div class="form-wrapper">
   <h3>Add a New Badge</h3>
   <form (ngSubmit)="addBadge()">

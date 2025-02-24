@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -53,5 +53,29 @@ export class BadgesComponent {
       this.newBadge = { name: '', icon: '', color: '' };
     }
   }
-}
 
+    @ViewChild('backgroundMusic') audioRef!: ElementRef<HTMLAudioElement>;
+
+    ngAfterViewInit() {
+      this.audioRef.nativeElement.volume = 0.3;
+    }
+
+    playAudio() {
+      this.audioRef.nativeElement.play();
+    }
+  
+    pauseAudio() {
+      this.audioRef.nativeElement.pause();
+    }
+  
+    stopAudio() {
+      const audio = this.audioRef.nativeElement;
+      audio.pause();
+      audio.currentTime = 0; // Reset the music to the beginning
+    }
+  
+    muteAudio() {
+      const audio = this.audioRef.nativeElement;
+      audio.muted = !audio.muted; // Toggle mute
+    }
+  }
